@@ -120,3 +120,10 @@ Scenario: Delete a comment
     When I click on "Supprimer"
     Then a confirmation message is displayed
     And I delete it
+    
+Scenario: Anonymize 
+    Given a candidate
+    When I click on "Anonymiser cette candidature"
+    Then a confirmation message is displayed
+    When i confirm
+    Then all informations are deleted
