@@ -18,18 +18,17 @@ def merge_csv(file1, file2):
     '''
 
     csvfile1 = pd.read_csv(file1)
-    csvfile2= pd.read_csv(file2)
+    csvfile2 = pd.read_csv(file2)
 
     csvfile3 = pd.merge(
         csvfile1[['profession_id', 'contract_type']],
-        csvfile2[['id','category_name']],
+        csvfile2[['id', 'category_name']],
         left_on=['profession_id'],
         right_on=['id'],
         how='outer'
     )
     csvfile3 = csvfile3.drop('id', axis=1)
     csvfile3.to_csv(OUTPUT_FILE, index=False)
-
 
 
 def format_jobs_per_categories_and_contract():
@@ -57,10 +56,10 @@ def format_jobs_per_categories_and_contract():
     header = True
     for key, categories in contract_type_team_dict.items():
         if header:
-            print('\t\tTOTAL\t|  ' + ''.join(['{0} | '.format(k) for k,v in categories.items()]))
+            print('\t\tTOTAL\t|  ' + ''.join(['{0} | '.format(k) for k, v in categories.items()]))
             header = False
 
-        count_by_category = ''.join(['{:<5}|  '.format(v) for k,v in categories.items()])
+        count_by_category = ''.join(['{:<5}|  '.format(v) for k, v in categories.items()])
         total_by_contract = dict(contract_type_total_number)[key]
         print(
             '{:<10}\t{:<8}|  {}'.format(key, total_by_contract, count_by_category)
@@ -75,7 +74,3 @@ if __name__ == "__main__":
     )
 
     format_jobs_per_categories_and_contract()
-
-
-
-
