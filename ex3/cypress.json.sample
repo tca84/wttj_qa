@@ -1,0 +1,11 @@
+{
+    "baseUrl": "https://www.welcomekit.co",
+    "env": {
+        "admin_email": "",
+        "admin_password": "",
+        "user.id" : "",
+        "_wk_session": "",
+        "activity": "",
+        "user.expires_at": ""
+      }
+}
