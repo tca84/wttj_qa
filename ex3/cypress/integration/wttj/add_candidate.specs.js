@@ -22,41 +22,42 @@ describe("Add a candidate", () => {
     cy.setCookie('user.expires_at', Cypress.env('user.expires_at') )
     cy.visit("/dashboard/o/dkxzma3/jobs/2XMOI_yq66e6b/new-candidate/392777")
 
+    cy.fixture("admin/candidate").as("candidate");
   });
 
-  it("Create candidate", () => {
-
+  it("Should create a candidate", function() {
+    
     cy
       .get('input[name="firstname"]')
-      .type('Jon')
+      .type(this.candidate.firstname)
 
     cy
       .get('input[name="lastname"]')
-      .type('Snow')
+      .type(this.candidate.lastname)
 
     cy
       .get('input[name="subtitle"]')
-      .type('QA Engineer')
+      .type(this.candidate.subtitle)
 
     cy
       .get('input[name="email"]')
-      .type('john.snow@gmail.com')
+      .type(this.candidate.email)
 
     cy
       .get('input[name="phone"]')
-      .type('0665656565')
+      .type(this.candidate.phone)
 
     cy
       .get('input[name="address"]')
-      .type('Au delà du mur')
+      .type(this.candidate.address)
 
     cy
       .get('input[name="city"]')
-      .type('Winterfell')
+      .type(this.candidate.city)
 
     cy
       .get('input[name="zip_code"]')
-      .type('75002')
+      .type(this.candidate.zip_code)
 
 
     cy.get("form").submit();
@@ -64,7 +65,7 @@ describe("Add a candidate", () => {
     cy.wait(5000)
   });
 
-  it("Candidate is listed in new column", () => {
+  it("Should be listed", function() {
 
     cy.visit("/dashboard/o/dkxzma3/jobs/2XMOI_yq66e6b")
 
@@ -75,7 +76,7 @@ describe("Add a candidate", () => {
       .find('.card-thumbnail-name')
       .should(function($span) {
         var text = $span.text();
-        expect(text).contains('Jon Snow');
+        expect(text).contains(this.candidate.name);
       });
   });
 });
